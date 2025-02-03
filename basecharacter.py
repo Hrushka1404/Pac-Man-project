@@ -30,21 +30,31 @@ class Guy:
         if char_pos[0] >= self.board_left[0] and char_pos[0] <= self.board_left[0] + self.cell_size * self.board_size[0] and char_pos[1] >= self.board_left[1] and char_pos[1] <= self.board_left[1] + self.cell_size * self.board_size[1]:
             x = char_pos[0] - self.board_left[0]
             y = char_pos[1] - self.board_left[1]
-            return (min(x // self.cell_size, self.board_size[0]-1), min(y // self.cell_size, self.board_size[1]-1))
+            return (int(min(x // self.cell_size, self.board_size[0]-1)), int(min(y // self.cell_size, self.board_size[1]-1)))
 
     def change_loc(self, dir):
         self.curr_dir = dir
         a, b = self.curr_loc
         if dir == 0 or dir == 2:
+            if self.dir[dir] < 0:
+                m = - self.size // 2
+            else:
+                m = self.size // 2
             next_loc = (min(max(0, a + self.dir[dir]), self.board_left[0]+self.board_size[0]*self.cell_size), b)
-            cell = self.get_cell(next_loc)
+            loc_edge = (min(max(0, a + m + self.dir[dir]), self.board_left[0]+self.board_size[0]*self.cell_size), b)
+            cell = self.get_cell(loc_edge)
             if self.table[cell[1]][cell[0]] == self.obstacle:
                 pass
             else:
                 self.curr_loc = next_loc
         elif dir == 1 or dir == 3:
+            if self.dir[dir] < 0:
+                m = - self.size // 2
+            else:
+                m = self.size // 2
             next_loc = (a, min(max(0, b + self.dir[dir]), self.board_left[1]+self.board_size[1]*self.cell_size))
-            cell = self.get_cell(next_loc)
+            loc_edge = (a, min(max(0, b + m + self.dir[dir]), self.board_left[1]+self.board_size[1]*self.cell_size))
+            cell = self.get_cell(loc_edge)
             if self.table[cell[1]][cell[0]] == self.obstacle:
                 pass
             else:
