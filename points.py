@@ -16,20 +16,22 @@ class Point:
                     ['1', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '1'] ,
                     ['1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'] ,
                     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']]
-    def __init__(self, board_size, cell_size, board_left, point_coord, table=0):
+    def __init__(self, board_size, cell_size, board_left, table=0):
         self.board_size = board_size
         self.cell_size = cell_size
         self.board_left = board_left
-        self.obstacle = 1
-        self.point_coord = point_coord
+        self.is_eaten = [[ 1 for j in range(board_size[1])] for i in range(board_size[0])]
 
 
     def render(self, screen):
         for i in range(self.board_size[0]):
             for j in range(self.board_size[1]):
-                if self.table[i][j] == '0' and self.obstacle == 1:
+                if self.table[i][j] == '0' and self.map_[i][j] == 1:
                     curr_loc = (self.board_left[1] + j * self.cell_size, self.board_left[0] + i * self.cell_size)
                     pygame.draw.circle(screen, pygame.Color('white'), curr_loc, self.cell_size // 4)
+
+    def eat_berry(self, pac_coord):
+        self.is_eaten[pac_coord[0]][pac_coord[1]] = 0
 
 
 
