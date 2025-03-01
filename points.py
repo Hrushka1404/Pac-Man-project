@@ -39,8 +39,14 @@ class Point:
     def eat_point(self, pac_coord):
         x, y = self.get_cell(pac_coord)
         if x > self.board_size[0] - 1 or y > self.board_size[1] - 1:
-            return
+            return 0
+        if self.is_eaten[y][x] == 1:
+            ans = 1
+        else:
+            ans = 0
         self.is_eaten[y][x] = 0
+        return ans
+
 
 
 

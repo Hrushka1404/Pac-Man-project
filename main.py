@@ -5,6 +5,10 @@ from basecharacter import Guy
 from points import Point
 
 pygame.init()
+pygame.font.init()
+font = pygame.font.SysFont("ubuntumono", 30)
+game_over_font = pygame.font.SysFont("dejavusansmono", 48)
+text_color = pygame.Color("crimson")
 WIDTH, HEIGHT = 1280, 720
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
@@ -18,13 +22,21 @@ guy.render_loc(screen)
 points = Point((31, 15), 30, (0, 0))
 points.render(screen)
 
+score = 0
+
+
+def show_score(self, score):
+    score = font.render(f'{score}', True, text_color)
+    screen.blit(score, (400, 500))
+
 
 while running:
     screen.fill("black")
     action = 1
     guy.temp_board_render(screen)
     points.render(screen)
-    points.eat_point(guy.curr_loc)
+    score += points.eat_point(guy.curr_loc)
+    show_score(screen, score)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
