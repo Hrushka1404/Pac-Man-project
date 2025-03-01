@@ -1,27 +1,57 @@
-# game starter
-# Example file showing a basic pygame "game loop"
-import pygame
+import pygame, sys
 from boardScript import Board
+from basecharacter import Guy
+from points import Point
 
-# pygame setup
 pygame.init()
+pygame.font.init()
+font = pygame.font.SysFont("ubuntumono", 30)
+game_over_font = pygame.font.SysFont("dejavusansmono", 48)
+text_color = pygame.Color("crimson")
+WIDTH, HEIGHT = 1280, 720
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
-playboard = Board(screen)
+
+#game creation
+guy = Guy((31, 15), 30, (0, 0))
+guy.render_loc(screen)
+points = Point((31, 15), 30, (0, 0))
+points.render(screen)
+
+score = 0
+
+
+def show_score(self, score):
+    score = font.render(f'{score}', True, text_color)
+    screen.blit(score, (400, 500))
+
 
 while running:
-    # poll for events
-    # pygame.QUIT event means the user clicked X to close your window
+    screen.fill("black")
+    action = 1
+    guy.temp_board_render(screen)
+    points.render(screen)
+    score += points.eat_point(guy.curr_loc)
+    show_score(screen, score)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    # fill the screen with a color to wipe away anything from last frame
-    screen.fill("black")
-
-    # RENDER YOUR GAME HERE
-
+        elif event.type == pygame.KEYDOWN:
+            if event.__dict__['key'] == pygame.K_UP:
+                guy.move(3, screen)
+                action = 0
+            elif event.__dict__['key'] == pygame.K_DOWN:
+                guy.move(1, screen)
+                action = 0
+            elif event.__dict__['key'] == pygame.K_RIGHT:
+                guy.move(2, screen)
+                action = 0
+            elif event.__dict__['key'] == pygame.K_LEFT:
+                guy.move(0, screen)
+                action = 0
+    if action:
+        guy.move(guy.curr_dir, screen)
     # flip() the display to put your work on screen
     pygame.display.flip()
 
