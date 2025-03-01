@@ -1,5 +1,4 @@
 import pygame, sys
-from boardScript import Board
 from basecharacter import Guy
 from points import Point
 
