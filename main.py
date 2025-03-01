@@ -1,6 +1,5 @@
 import pygame, sys
 from boardScript import Board
-from world import World
 from basecharacter import Guy
 from points import Point
 
@@ -15,8 +14,6 @@ clock = pygame.time.Clock()
 running = True
 
 #game creation
-playboard = Board(screen)
-playboard.board_render(screen)
 guy = Guy((31, 15), 30, (0, 0))
 guy.render_loc(screen)
 points = Point((31, 15), 30, (0, 0))
