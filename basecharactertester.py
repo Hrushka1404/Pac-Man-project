@@ -1,6 +1,7 @@
 # pacman class is gonna be here
 import pygame
 from basecharacter import Guy
+from blinkychar import Blinky
 
 
 pygame.init()
@@ -10,6 +11,9 @@ running = True
 
 guy = Guy((31, 15), 30, (0, 0))
 guy.render_loc(screen)
+ghost1 = Blinky((31, 15), 30, (0, 0))
+ghost1.render_loc_ghost(screen)
+ghost1.set_speed(2)
 
 dirr = None
 while running:
@@ -36,6 +40,8 @@ while running:
                 action = 0
     if action:
         guy.move(guy.curr_dir, screen)
+    ghost1.find_targ(*guy.get_coords())
+    ghost1.render_loc_ghost(screen)
 
     # fill the screen with a color to wipe away anything from last frame
 
