@@ -2,6 +2,7 @@ import pygame, sys
 from basecharacter import Guy
 from points import Point
 from blinkychar import Blinky
+from time import sleep
 
 pygame.init()
 pygame.font.init()
@@ -12,6 +13,8 @@ WIDTH, HEIGHT = 1280, 720
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
+
+big_font = pygame.font.SysFont('boulder', 350)
 
 #game creation
 guy = Guy((31, 15), 30, (0, 0))
@@ -29,6 +32,10 @@ score = 0
 def show_score(self, score):
     score = font.render(f'{score}', True, text_color)
     screen.blit(score, (400, 500))
+
+def show_game_over():
+    text = big_font.render('GAME OVER', True, 'red')
+    screen.blit(text, (0, 0))
 
 
 while running:
@@ -58,8 +65,13 @@ while running:
         guy.move(guy.curr_dir, screen)
     ghost1.find_targ(*guy.get_coords())
     ghost1.render_loc_ghost(screen)
+    state = ghost1.pac_caught(guy.curr_loc)
+    if state:
+        show_game_over()
+
     # flip() the display to put your work on screen
     pygame.display.flip()
+
 
     clock.tick(60)  # limits FPS to 60
 

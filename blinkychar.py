@@ -71,5 +71,9 @@ class Blinky(Guy):
     def render_loc_ghost(self, screen):
         pygame.draw.circle(screen, pygame.Color('red'), self.curr_loc, self.size)
 
-        
+    def pac_caught(self, pac_loc):
+        if self.get_cell(self.curr_loc) == self.get_cell(pac_loc):
+            print('game over')
+            return True
+        return False      
 
