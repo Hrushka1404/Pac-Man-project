@@ -1,6 +1,7 @@
 import pygame, sys
 from basecharacter import Guy
 from points import Point
+from blinkychar import Blinky
 
 pygame.init()
 pygame.font.init()
@@ -17,6 +18,10 @@ guy = Guy((31, 15), 30, (0, 0))
 guy.render_loc(screen)
 points = Point((31, 15), 30, (0, 0))
 points.render(screen)
+
+ghost1 = Blinky((31, 15), 30, (0, 0))
+ghost1.render_loc_ghost(screen)
+ghost1.set_speed(2)
 
 score = 0
 
@@ -51,6 +56,8 @@ while running:
                 action = 0
     if action:
         guy.move(guy.curr_dir, screen)
+    ghost1.find_targ(*guy.get_coords())
+    ghost1.render_loc_ghost(screen)
     # flip() the display to put your work on screen
     pygame.display.flip()
 

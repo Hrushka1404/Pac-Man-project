@@ -7,6 +7,7 @@ class Blinky(Guy):
     def __init__(self, board_size, cell_size, board_left, table=0):
         super().__init__(board_size, cell_size, board_left, table=0)
         self.curr_loc = (29 * 30 + 15, 13 * 30 + 15)
+        self.curr_dir = 3
 
     def get_step(self, x, y):
         targ_cell = self.get_cell((x, y))[::-1]
@@ -51,7 +52,18 @@ class Blinky(Guy):
         direction = self.get_step(x, y)
         if direction:
             num_dir = self.simple_dirs[direction]
-            self.change_loc(num_dir)
+            a, b = self.get_cell(self.curr_loc)
+            x1, y1 = self.curr_loc
+            if direction == 'left' or direction == 'right':
+                if y1 == b * self.cell_size + self.cell_size//2 + self.board_left[1]:
+                    self.change_loc(num_dir)
+                else:
+                    self.change_loc(self.curr_dir)
+            else:
+                if x1 == a * self.cell_size + self.cell_size//2 + self.board_left[0]:
+                    self.change_loc(num_dir)
+                else:
+                    self.change_loc(self.curr_dir)
         else:
             print(direction)
 
