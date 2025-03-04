@@ -5,6 +5,7 @@ from blinkychar import Blinky
 from time import sleep
 from pinkychar import Pinky
 from inkychar import Inky
+from clydechar import Clyde
 
 pygame.init()
 pygame.font.init()
@@ -35,6 +36,10 @@ ghost2.set_speed(3)
 ghost3 = Inky((31, 15), 30, (0, 0))
 ghost3.render_loc_ghost(screen, 'cyan')
 ghost3.set_speed(3)
+
+ghost4 = Clyde((31, 15), 30, (0, 0))
+ghost4.render_loc_ghost(screen, 'orange')
+ghost4.set_speed(3)
 
 
 score = 0
@@ -82,6 +87,9 @@ while running:
 
     ghost3.chase(guy.get_coords(), ghost1.get_coords(), guy.curr_dir)
     ghost3.render_loc_ghost(screen, 'cyan')
+
+    ghost4.chase(guy.get_coords())
+    ghost4.render_loc_ghost(screen, 'orange')
 
     state = (ghost1.pac_caught(guy.curr_loc) or ghost2.pac_caught(guy.curr_loc))
     if state:
