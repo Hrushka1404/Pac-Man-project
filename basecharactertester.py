@@ -13,7 +13,7 @@ guy = Guy((31, 15), 30, (0, 0))
 guy.render_loc(screen)
 ghost1 = Blinky((31, 15), 30, (0, 0))
 ghost1.render_loc_ghost(screen)
-ghost1.set_speed(2)
+ghost1.set_speed(3)
 
 dirr = None
 while running:
