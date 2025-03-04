@@ -28,6 +28,7 @@ class Guy:
         self.cell_size = cell_size
         self.curr_dir = None
         self.move_len = 5
+        self.board_edge = (self.board_left[0] + self.board_size[0] * self.cell_size, self.board_left[1] + self.board_size[1] * self.cell_size)
 
     def set_speed(self, v):
         self.move_len = v

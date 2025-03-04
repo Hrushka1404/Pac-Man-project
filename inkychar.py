@@ -7,7 +7,6 @@ class Inky(Blinky):
     def __init__(self, board_size, cell_size, board_left, table=0):
         super().__init__(board_size, cell_size, board_left, table)
         self.curr_loc = (27 * 30 + 15, 13 * 30 + 15)
-        self.board_edge = (self.board_left[0] + self.board_size[0] * self.cell_size, self.board_left[1] + self.board_size[1] * self.cell_size)
 
     def chase(self, pac_loc, blinky_loc, direc):
         m = 0
