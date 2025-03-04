@@ -91,7 +91,10 @@ while running:
     ghost4.chase(guy.get_coords())
     ghost4.render_loc_ghost(screen, 'orange')
 
-    state = (ghost1.pac_caught(guy.curr_loc) or ghost2.pac_caught(guy.curr_loc))
+    state = (ghost1.pac_caught(guy.curr_loc) 
+             or ghost2.pac_caught(guy.curr_loc)
+             or ghost3.pac_caught(guy.curr_loc)
+             or ghost4.pac_caught(guy.curr_loc))
     if state:
         show_game_over()
 
