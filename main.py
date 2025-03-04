@@ -3,6 +3,8 @@ from basecharacter import Guy
 from points import Point
 from blinkychar import Blinky
 from time import sleep
+from pinkychar import Pinky
+from inkychar import Inky
 
 pygame.init()
 pygame.font.init()
@@ -24,7 +26,16 @@ points.render(screen)
 
 ghost1 = Blinky((31, 15), 30, (0, 0))
 ghost1.render_loc_ghost(screen)
-ghost1.set_speed(2)
+ghost1.set_speed(3)
+
+ghost2 = Pinky((31, 15), 30, (0, 0))
+ghost2.render_loc_ghost(screen, 'pink')
+ghost2.set_speed(3)
+
+ghost3 = Inky((31, 15), 30, (0, 0))
+ghost3.render_loc_ghost(screen, 'cyan')
+ghost3.set_speed(3)
+
 
 score = 0
 
@@ -65,7 +76,14 @@ while running:
         guy.move(guy.curr_dir, screen)
     ghost1.find_targ(*guy.get_coords())
     ghost1.render_loc_ghost(screen)
-    state = ghost1.pac_caught(guy.curr_loc)
+
+    ghost2.chase(*guy.get_coords(), guy.curr_dir)
+    ghost2.render_loc_ghost(screen, 'pink')
+
+    ghost3.chase(guy.get_coords(), ghost1.get_coords(), guy.curr_dir)
+    ghost3.render_loc_ghost(screen, 'cyan')
+
+    state = (ghost1.pac_caught(guy.curr_loc) or ghost2.pac_caught(guy.curr_loc))
     if state:
         show_game_over()
 

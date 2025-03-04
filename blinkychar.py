@@ -68,8 +68,8 @@ class Blinky(Guy):
             print(direction)
 
 
-    def render_loc_ghost(self, screen):
-        pygame.draw.circle(screen, pygame.Color('red'), self.curr_loc, self.size)
+    def render_loc_ghost(self, screen, color='red'):
+        pygame.draw.circle(screen, pygame.Color(color), self.curr_loc, self.size)
 
     def pac_caught(self, pac_loc):
         if self.get_cell(self.curr_loc) == self.get_cell(pac_loc):
