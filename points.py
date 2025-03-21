@@ -28,7 +28,7 @@ class Point:
             for j in range(self.board_size[0]):
                 if self.table[i][j] == '0' and self.is_eaten[i][j] == 1:
                     curr_loc = (self.board_left[1] + (j) * self.cell_size + self.cell_size // 2, self.board_left[0] + (i) * self.cell_size + self.cell_size // 2)
-                    pygame.draw.circle(screen, pygame.Color('white'), curr_loc, self.cell_size // 4)
+                    pygame.draw.circle(screen, pygame.Color('white'), curr_loc, self.cell_size // 6)
 
     def get_cell(self, char_pos):
         if char_pos[0] >= self.board_left[0] and char_pos[0] <= self.board_left[0] + self.cell_size * self.board_size[0] and char_pos[1] >= self.board_left[1] and char_pos[1] <= self.board_left[1] + self.cell_size * self.board_size[1]:
