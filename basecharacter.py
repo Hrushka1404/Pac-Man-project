@@ -19,6 +19,7 @@ class Guy:
                     ['1', '0', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '1', '1', '1', '1', '0', '0', '0', '0', '1', '1', '1', '1', '0', '0', '1'] ,
                     ['1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1'] ,
                     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '2', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']]
+
     def __init__(self, board_size, cell_size, board_left, table=0):
         self.obstacle = '1'
         self.size = 9
@@ -29,6 +30,12 @@ class Guy:
         self.curr_dir = None
         self.move_len = 5
         self.board_edge = (self.board_left[0] + self.board_size[0] * self.cell_size, self.board_left[1] + self.board_size[1] * self.cell_size)
+        top_left = (self.board_left[0] - self.board_size[0] * self.cell_size, self.board_left[1] - self.board_size[1] * self.cell_size)
+        top_right = (top_left[0] + board_size[0] * cell_size, top_left[1])
+        bottom_right = (top_right[0], top_right[1] - self.board_size[1] * self.cell_size)
+        bottom_left = (top_left[0], bottom_right[1])
+
+        corners = {'top left': top_left, 'bottom right': bottom_right, 'bottom left': bottom_left, 'top right': top_right}
 
     def set_speed(self, v):
         self.move_len = v
@@ -104,3 +111,4 @@ class Guy:
             for x in range(self.board_size[0]):
                 if self.table[y][x] == self.obstacle:
                     pygame.draw.rect(screen, pygame.Color('white'), pygame.Rect(self.board_left[0] + self.cell_size * x, self.board_left[1] + self.cell_size * y, self.cell_size, self.cell_size), 1)
+                        

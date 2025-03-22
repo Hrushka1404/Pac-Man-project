@@ -75,5 +75,9 @@ class Blinky(Guy):
         if self.get_cell(self.curr_loc) == self.get_cell(pac_loc):
             print('game over')
             return True
-        return False      
+        return False    
+
+    def scatter_mode(self, corner):
+        if corner in ('bottom right', 'bottom left', 'top right', 'top left'):
+            self.find_targ(*self.corners[corner])  
 
